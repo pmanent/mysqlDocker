@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  spring-boot-edge:
+    image: spring-boot-edge
+    container_name: edge
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8088:8080
+    volumes:
+      - /data/spring-boot-app

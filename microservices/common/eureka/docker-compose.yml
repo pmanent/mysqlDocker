@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  spring-boot-eureka-server:
+    image: spring-boot-eureka-server
+    container_name: eurekaServer
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    expose:
+      - 8761
+      - 8888
+    ports:
+      - 8761:8761
+      - 8888:8888
+    volumes:
+      - /data/spring-boot-app

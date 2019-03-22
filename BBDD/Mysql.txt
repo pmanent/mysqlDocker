@@ -1,0 +1,45 @@
+docker pull mysql/mysql-server:5.6.41
+
+docker run --name=mysql1 -d mysql/mysql-server:5.6.41
+
+docker ps
+
+docker logs mysql1
+
+docker logs mysql1 2>&1 | grep GENERATED
+
+GENERATED ROOT PASSWORD: niqx0KARUbIr6AlaraDj4LXYhok
+
+docker exec -it mysql1 mysql -uroot -p
+
+ALTER USER 'root'@'julia' IDENTIFIED BY 'GApJOn-Ofs3pkOhoRQ0N[eGeS0b';
+
+SET PASSWORD = PASSWORD('julia');
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%%'; FLUSH PRIVILEGES;
+
+docker run --name=mysql1 -d -p 3306:3306 mysql/mysql-server:5.6.41
+docker start --name=mysql1 
+
+
+Veure la ip del container:
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' container_name_or_id
+
+
+
+
+One liner to stop / remove all of Docker containers:
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'julia';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+CREATE USER 'root'@'%' IDENTIFIED BY 'julia';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+
+CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost' WITH GRANT OPTION;
+CREATE USER 'monty'@'%' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'monty'@'%' WITH GRANT OPTION;
